@@ -198,6 +198,10 @@ netnumis:
 server:
 	$(MAKE) -s -C apps $@
 
+.PHONY: bacserver
+bacserver:
+	$(MAKE) -s -C apps $@
+
 .PHONY: server-client
 server-client:
 	$(MAKE) LEGACY=true -s -C apps $@

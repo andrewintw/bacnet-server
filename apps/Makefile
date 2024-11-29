@@ -62,6 +62,9 @@ endif
 ifeq (${BBMD},server)
 BBMD_DEFINE = -DBBMD_ENABLED=1
 endif
+ifeq (${BBMD},bacserver)
+BBMD_DEFINE = -DBBMD_ENABLED=1
+endif
 ifeq (${BBMD},client)
 BBMD_DEFINE = -DBBMD_ENABLED=0 -DBBMD_CLIENT_ENABLED
 endif
@@ -213,7 +216,7 @@ endif
 
 .EXPORT_ALL_VARIABLES:
 
-SUBDIRS = lib readprop writeprop readfile writefile reinit server dcc \
+SUBDIRS = lib readprop writeprop readfile writefile reinit server bacserver dcc \
 	whohas whois iam ucov scov timesync epics readpropm readrange \
 	writepropm uptransfer getevent uevent abort error event ack-alarm \
 	server-client add-list-element remove-list-element create-object \
@@ -404,6 +407,10 @@ scov: $(BACNET_LIB_TARGET)
 
 .PHONY: server
 server: $(BACNET_LIB_TARGET)
+	$(MAKE) -B -C $@
+
+.PHONY: bacserver
+bacserver: $(BACNET_LIB_TARGET)
 	$(MAKE) -B -C $@
 
 .PHONY: server-client
